@@ -1,0 +1,10 @@
+#!/bin/bash
+convert_base() {
+echo "obase=$1;ibase=$2;$3" | bc
+}
+water_dec=$(convert_base 10 "$(echo -n $WATER | wc -c)" "$(echo -n $WATER | tr -d '[:space:]')")
+stir_dec=$(convert_base 10 "$(echo -n $STIR | wc -c)" "$(echo -n $STIR | tr -d '[:space:]')")
+result_dec=$((water_dec + stir_dec))
+result=$(convert_base "$(echo -n $BESTCHOL | wc -c)" 10 "$result_dec")
+echo "$result"
+
